@@ -2,6 +2,7 @@ document.getElementById('processButton').addEventListener('click', function() {
     const files = document.getElementById('imageInput').files;
     const resizeWidth = parseInt(document.getElementById('resizeWidth').value);
     const resizeHeight = parseInt(document.getElementById('resizeHeight').value);
+    const format = document.getElementById('format').value;
     const resultContainer = document.getElementById('resultContainer');
 
     resultContainer.innerHTML = '<h2>Processed Images:</h2>'; // Clear previous results
@@ -36,11 +37,11 @@ document.getElementById('processButton').addEventListener('click', function() {
                 resultImageContainer.className = 'result-image-container';
 
                 const resultImage = new Image();
-                resultImage.src = canvas.toDataURL('image/png');
+                resultImage.src = canvas.toDataURL(`image/${format}`);
 
                 const downloadButton = document.createElement('a');
                 downloadButton.href = resultImage.src;
-                downloadButton.download = 'processed_' + file.name;
+                downloadButton.download = `processed_${file.name}.${format}`;
                 downloadButton.className = 'download-button';
                 downloadButton.textContent = 'Download';
 
